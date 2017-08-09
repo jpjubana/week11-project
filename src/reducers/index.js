@@ -6,7 +6,8 @@ import update from 'immutability-helper';
 const initialState = {
     users: userList(),
     selectedUser: null,
-    selectedAccount: null
+    selectedAccount: null,
+    withdrawFunds: null
 }
 
 const reducer = function(state = initialState, action) {
@@ -17,7 +18,7 @@ const reducer = function(state = initialState, action) {
                     $set: action.payload
                 }
             });
-            
+
             /*
 
               You will need to correct a reducer case for ACCOUNT_SELECTED here - HINT: it should mimic closely the USER_SELECTED case.

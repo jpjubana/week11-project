@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 class UserDetail extends Component {
-  
+
   render() {
     if(!this.props.user) {
       return (
@@ -25,19 +25,18 @@ class UserDetail extends Component {
 
       //creating a Link with the account type for
       //each account.
+
       return (
         <div key={account.id}>
           <Link
-            onClick={() => this.props.selectAccount(account)}
+            onClick={() => this.props.selectAccount(account.id)}
             to={`/users/${id}/${account.id}`}>{account.accountType}</Link>
         </div>
       )
     })
 
-    console.log(this.props.user.accounts);
-
     return (
-      <div className="col-md-6">
+      <div style={{marginTop: '50px'}} className="container col-md-6">
         <div className= "card">
           <div className= "card-block">
             <h4 className= "card-title">Account Information</h4>
@@ -57,9 +56,10 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
+  const user = state.users.find(user => user._id === state.selectedUser);
   return {
-    user: state.selectedUser,
-    account: state.selectedAccount
+    user,
+    account: user.accounts.find(account => account.id === state.selectedAccount)
   };
 }
 
